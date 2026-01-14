@@ -1,0 +1,296 @@
+/* === VARIABLES DE COLOR Y FUENTE === */
+:host {
+  --primary-color: #00838F;   /* Turquesa de Innomedic */
+  --primary-dark: #005662;
+  --secondary-color: #283593; /* Azul oscuro del logo de la psicóloga */
+  --bg-light: #F5F7FA;        /* Fondo general claro */
+  --card-bg: #FFFFFF;         /* Fondo de tarjetas */
+  --text-dark: #2C3E50;
+  --text-muted: #607D8B;
+  --danger-color: #D32F2F;
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+}
+
+/* === ESTRUCTURA PRINCIPAL === */
+.app-container {
+  background-color: var(--bg-light);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: var(--text-dark);
+}
+
+.survey-content {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 0 20px;
+  flex: 1;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* === CABECERA === */
+.main-header {
+  background: var(--card-bg);
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow-sm);
+  border-bottom: 3px solid var(--primary-color);
+}
+
+.logo-wrapper {
+  flex: 1;
+  display: flex;
+}
+
+.logo-left { justify-content: flex-start; }
+.logo-right { justify-content: flex-end; }
+
+/* Estilo general para los logos */
+.header-logo {
+  height: auto;
+  width: auto;
+  object-fit: contain;
+  /* Aumentamos la altura máxima general para que ambos logos tengan espacio */
+  max-height: 100px; 
+}
+
+/* Ajuste ESPECÍFICO para que el logo de la psicóloga se vea más grande y mejor */
+.ps-logo {
+  /* Permitimos que sea más alto que el otro si es necesario para verse bien */
+  max-height: 120px;
+  /* Eliminamos el min-width para evitar deformaciones y dejamos que object-fit haga el trabajo */
+}
+
+/* Ajuste para el logo de Innomedic para mantener el equilibrio */
+.in-logo {
+  max-height: 90px;
+}
+
+.header-title {
+  flex: 2;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.header-title h1 {
+  color: var(--secondary-color);
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.header-title h2 {
+  color: var(--primary-color);
+  margin: 5px 0 0 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* === TARJETAS (Datos y Preguntas) === */
+.card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 30px;
+  margin-bottom: 25px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid #E0E0E0;
+}
+
+.card-title {
+  color: var(--secondary-color);
+  margin-top: 0;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  font-size: 1.3rem;
+  border-bottom: 2px solid var(--bg-light);
+  padding-bottom: 15px;
+}
+
+.card-title .icon {
+  margin-right: 10px;
+  font-size: 1.4rem;
+}
+
+/* === FORMULARIO (Grid) === */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas por defecto */
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Clase utilitaria para que un campo ocupe 2 columnas */
+.span-2 {
+  grid-column: span 2;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select {
+  padding: 12px;
+  border: 2px solid #CFD8DC;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s;
+  background-color: #FAFAFA;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--primary-color);
+  background-color: #FFF;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 131, 143, 0.1);
+}
+
+.required {
+  color: var(--danger-color);
+  margin-left: 3px;
+}
+
+/* === PREGUNTAS === */
+.question-header {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  align-items: baseline;
+}
+
+.question-number {
+  background: var(--secondary-color);
+  color: white;
+  font-weight: bold;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  height: fit-content;
+}
+
+.question-text {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* === OPCIONES DE RESPUESTA === */
+.options-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.option-btn {
+  background: var(--bg-light);
+  border: 2px solid transparent;
+  padding: 12px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex: 1 1 auto; /* Crecen para llenar el espacio */
+  text-align: center;
+  font-weight: 500;
+  color: var(--text-muted);
+  min-width: 120px;
+}
+
+.option-btn input { display: none; } /* Ocultar radio nativo */
+
+.option-btn:hover {
+  background: #E0E0E0;
+  color: var(--text-dark);
+}
+
+.option-btn.selected {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-dark);
+  box-shadow: 0 4px 8px rgba(0, 131, 143, 0.2);
+}
+
+/* === BOTÓN Y FOOTER === */
+.footer-action {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  color: white;
+  border: none;
+  padding: 18px 40px;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.2s, box-shadow 0.2s;
+  width: 100%;
+  max-width: 400px;
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 131, 143, 0.3);
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.main-footer {
+  text-align: center;
+  padding: 20px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-top: auto;
+}
+
+/* Spinner de carga */
+.loading-state { display: flex; align-items: center; justify-content: center; gap: 10px; }
+.spinner {
+  width: 20px; height: 20px;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* === RESPONSIVE (Móviles) === */
+@media (max-width: 768px) {
+  .main-header {
+    flex-direction: column;
+    gap: 15px;
+    padding: 1.5rem;
+  }
+  /* En móviles, permitimos que el logo sea un poco más pequeño para que no ocupe toda la pantalla */
+  .ps-logo { max-height: 90px; }
+  .in-logo { max-height: 70px; }
+  
+  .header-title { order: -1; /* Título primero en móviles */ margin-bottom: 10px; }
+  .logo-wrapper { justify-content: center; width: 100%; }
+  
+  .form-grid { grid-template-columns: 1fr; } /* 1 sola columna en móviles */
+  .span-2 { grid-column: span 1; }
+  
+  .card { padding: 20px; }
+  .option-btn { width: 100%; padding: 15px; border-radius: 12px; }
+}
