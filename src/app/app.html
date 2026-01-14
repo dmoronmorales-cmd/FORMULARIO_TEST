@@ -2,14 +2,18 @@
   
   <header class="main-header">
     <div class="logo-wrapper logo-left">
-      <img src="logo-psicologa.png" alt="Psicóloga" class="header-logo ps-logo">
+      <img src="logo-psicologa.png" alt="Lic. Mary Inés Morón Morales" class="header-logo ps-logo" 
+           onerror="this.style.display='none'">
     </div>
+    
     <div class="header-title">
       <h1>Evaluación de Riesgos Psicosociales</h1>
-      <h2>Cuestionario ISTAS-21 (Versión Corta - Anónimo)</h2>
+      <h2>Cuestionario ISTAS-21 (Versión Corta)</h2>
     </div>
+    
     <div class="logo-wrapper logo-right">
-      <img src="logo-clinica.png" alt="Innomedic" class="header-logo in-logo">
+      <img src="logo-clinica.png" alt="Innomedic" class="header-logo in-logo" 
+           onerror="this.style.display='none'">
     </div>
   </header>
 
@@ -22,15 +26,18 @@
       
       <div class="form-grid">
         <div class="form-group span-2">
-          <label for="empresa">Empresa / Organización: <span class="required">*</span></label>
-          <input id="empresa" [(ngModel)]="modelo.empresa" placeholder="Ej. Agro Peruanito SAC">
+          <label for="nombre">Nombres y Apellidos: <span class="required">*</span></label>
+          <input id="nombre" [(ngModel)]="modelo.nombre" placeholder="Ej. Juan Pérez">
         </div>
-        
-        <div class="form-group span-2">
-          <label for="puesto">Puesto de Trabajo: <span class="required">*</span></label>
-          <input id="puesto" [(ngModel)]="modelo.puesto" placeholder="Ej. Obrero, Vigilancia, Operaciones...">
+        <div class="form-group">
+          <label for="dni">DNI: <span class="required">*</span></label>
+          <input id="dni" type="number" [(ngModel)]="modelo.dni" placeholder="Ej. 12345678">
         </div>
 
+        <div class="form-group span-2">
+          <label for="empresa">Empresa / Organización: <span class="required">*</span></label>
+          <input id="empresa" [(ngModel)]="modelo.empresa" placeholder="Ej. Clínica San Felipe">
+        </div>
         <div class="form-group">
           <label for="edad">Edad: <span class="required">*</span></label>
           <input id="edad" type="number" [(ngModel)]="modelo.edad" placeholder="Ej. 35">
@@ -43,9 +50,6 @@
           </select>
         </div>
       </div>
-      <p style="margin-top: 15px; font-size: 0.85rem; color: #666; font-style: italic;">
-        * Esta encuesta es anónima. No se registran nombres ni correos electrónicos personales.
-      </p>
     </section>
 
     <section class="questions-section">
@@ -56,13 +60,8 @@
         </div>
         
         <div class="options-container">
-          <label *ngFor="let opt of (preg.opcionesEspecificas || opcionesGenericas)" class="option-btn" 
-                 [class.selected]="modelo['p'+preg.id] === opt.valor"
-                 
-                 [style.width]="preg.id === 31 ? '100%' : 'auto'" 
-                 [style.text-align]="preg.id === 31 ? 'left' : 'center'"
-                 [style.justify-content]="preg.id === 31 ? 'flex-start' : 'center'">
-            
+          <label *ngFor="let opt of preg.opts" class="option-btn" 
+                 [class.selected]="modelo['p'+preg.id] === opt.valor">
             <input type="radio" [name]="'p'+preg.id" [value]="opt.valor" 
                    (change)="modelo['p'+preg.id] = opt.valor">
             <span class="opt-text">{{opt.texto}}</span>
@@ -73,12 +72,13 @@
 
     <div class="footer-action">
       <button (click)="enviar()" [disabled]="enviando" class="submit-btn">
-        <span *ngIf="!enviando">ENVIAR EVALUACIÓN ANÓNIMA</span>
+        <span *ngIf="!enviando">FINALIZAR Y ENVIAR EVALUACIÓN</span>
         <span *ngIf="enviando" class="loading-state">
-          <div class="spinner"></div> Procesando...
+          PROCESANDO...
         </span>
       </button>
     </div>
+
   </main>
 
   <footer class="main-footer">
