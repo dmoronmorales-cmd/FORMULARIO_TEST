@@ -1,0 +1,84 @@
+<div class="app-container">
+  
+  <header class="main-header">
+    <div class="logo-wrapper logo-left">
+      <img src="logo-psicologa.png" alt="Lic. Mary Inés Morón Morales" class="header-logo ps-logo" 
+           onerror="this.style.display='none'">
+    </div>
+    
+    <div class="header-title">
+      <h1>Evaluación de Riesgos Psicosociales</h1>
+      <h2>Cuestionario ISTAS-21 (Versión Corta)</h2>
+    </div>
+    
+    <div class="logo-wrapper logo-right">
+      <img src="logo-rezola.jpg" alt="Innomedic" class="header-logo in-logo" 
+           onerror="this.style.display='none'">
+    </div>
+  </header>
+
+  <main class="survey-content">
+    
+    <section class="card data-card" id="card-datos">
+      <h3 class="card-title">
+        <span class="icon">📋</span> Datos Generales
+      </h3>
+      <div class="form-grid">
+        <div class="form-group span-2">
+          <label for="empresa">Empresa / Organización: <span class="required">*</span></label>
+          <input id="empresa" [(ngModel)]="modelo.empresa" placeholder="Ej. HOSPITAL REGIONAL DE CAÑETE">
+        </div>
+        <div class="form-group">
+          <label for="puesto">Área de trabajo(unidad,departamento o servicio): <span class="required">*</span></label>
+          <input id="puesto" [(ngModel)]="modelo.puesto" placeholder="Ej.Enfermero(a)/Tec.Enfermería,Médico, ...">
+        </div>
+
+        <div class="form-group">
+          <label for="edad">Edad: <span class="required">*</span></label>
+          <input id="edad" type="number" [(ngModel)]="modelo.edad" placeholder="Ej. 35">
+        </div>
+        <div class="form-group span-2">
+          <label for="sexo">Sexo: <span class="required">*</span></label>
+          <select id="sexo" [(ngModel)]="modelo.sexo">
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <section class="questions-section">
+      <div *ngFor="let preg of preguntas" class="card question-card" [id]="'preg-' + preg.id">
+        <div class="question-header">
+          <span class="question-number">{{preg.id}}</span>
+          <p class="question-text">{{preg.texto}} <span class="required">*</span></p>
+        </div>
+        
+        <div class="options-container">
+          <label *ngFor="let opt of preg.opts" class="option-btn" 
+                 [class.selected]="modelo['p'+preg.id] === opt.valor">
+            <input type="radio" [name]="'p'+preg.id" [value]="opt.valor" 
+                   (change)="modelo['p'+preg.id] = opt.valor">
+            <span class="opt-text">{{opt.texto}}</span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-action">
+      <button (click)="enviar()" [disabled]="enviando" class="submit-btn">
+        <span *ngIf="!enviando">FINALIZAR Y ENVIAR EVALUACIÓN</span>
+        <span *ngIf="enviando" class="loading-state">
+          PROCESANDO...
+        </span>
+      </button>
+    </div>
+
+  </main>
+
+  <footer class="main-footer">
+    <p>© 2026 Área de Seguridad y Salud en el Trabajo - HOSPITAL REGIONAL DE CAÑETE</p>
+    <p>REZOLA</p>
+    <p>Lic. Mary Inés Morón Morales</p>
+  </footer>
+</div>
